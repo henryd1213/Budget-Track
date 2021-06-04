@@ -109,18 +109,22 @@ public class BudgetTracker extends Application {
         update.setId("update");
         update.setLayoutX(50);
         update.setLayoutY(420);
+        update.setOnAction(this::update);
         save = new Button("Save");
         save.setId("save");
         save.setLayoutX(114);
         save.setLayoutY(420);
+        save.setOnAction(this::save);
         load = new Button("Load");
         load.setId("load");
         load.setLayoutX(165);
         load.setLayoutY(420);
+        load.setOnAction(this::load);
         delete = new Button("Delete");
         delete.setId("delete");
         delete.setLayoutX(215);
         delete.setLayoutY(420);
+        delete.setOnAction(this::delete);
         
         Rectangle goalBox = new Rectangle(300, 25, 1100, 232);
         goalBox.setStroke(Color.BLACK);
@@ -192,7 +196,40 @@ public class BudgetTracker extends Application {
         primaryStage.show();
     }
     
+        public void update(ActionEvent event){
+        
+        int biweekIncome = Integer.parseInt(incomeAmount.getText());
+        String targets = savingTarget.getValue().toString();
+        String noPercentT = targets.replace("%", "");
+        int targetSaved = Integer.parseInt(noPercentT);
+        int monthlyInc = biweekIncome * 2;
+        double actualTSaved = .01 * targetSaved;
+        double goal = monthlyInc * actualTSaved;
+      /* double currentAmount = monthly inc - expenses array total;
+        if(goal < currentAmount){
+        underperforming.setFill(Color.RED);  
+        }else if(goal == currentAmount){
+        meeting.setFill(Color.GREEN);
+        }else if(goal > currentAmount){
+        overperforming.setFill(Color.GREEN);
+        }
+        
+        
+        waiting on update array to accuratley depict expenses
+        */
+    }
     
+    public void save(ActionEvent event){
+        
+    }
+    
+    public void load(ActionEvent event){
+        
+    }
+    
+    public void delete(ActionEvent event){
+        
+    }
     /*
     update button method
     
