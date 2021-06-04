@@ -198,6 +198,30 @@ public class BudgetTracker extends Application {
     
         public void update(ActionEvent event){
         
+            String incomeTest=incomeAmount.getText();
+boolean incorrect = true;
+while(incorrect){
+try{Double.parseDouble(incomeTest);incorrect = false;}
+catch(NumberFormatException nfe){
+   incomeTest="0";
+   Alert a = new Alert(AlertType.ERROR);
+   a.setContentText("Invalid data type");
+   a.show();
+ }
+}
+
+String amountTest=amount.getText();
+boolean incorrect2 = true;
+while(incorrect2){
+try{Double.parseDouble(amountTest);incorrect2 = false;}
+catch(NumberFormatException nfe){
+   amountTest="0";
+   Alert a = new Alert(AlertType.ERROR);
+   a.setContentText("Invalid data type");
+   a.show();
+ }
+}
+            
         int biweekIncome = Integer.parseInt(incomeAmount.getText());
         String targets = savingTarget.getValue().toString();
         String noPercentT = targets.replace("%", "");
@@ -220,7 +244,29 @@ public class BudgetTracker extends Application {
     }
     
     public void save(ActionEvent event){
-        
+        String incomeTest=incomeAmount.getText();
+boolean incorrect = true;
+while(incorrect){
+try{Double.parseDouble(incomeTest);incorrect = false;}
+catch(NumberFormatException nfe){
+   incomeTest="0";
+   Alert a = new Alert(AlertType.ERROR);
+   a.setContentText("Invalid data type");
+   a.show();
+ }
+}
+
+String amountTest=amount.getText();
+boolean incorrect2 = true;
+while(incorrect2){
+try{Double.parseDouble(amountTest);incorrect2 = false;}
+catch(NumberFormatException nfe){
+   amountTest="0";
+   Alert a = new Alert(AlertType.ERROR);
+   a.setContentText("Invalid data type");
+   a.show();
+ }
+}
     }
     
     public void load(ActionEvent event){
