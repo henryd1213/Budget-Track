@@ -98,16 +98,16 @@ public class BudgetTracker extends Application {
         incomeAmount = new TextField("0");
         incomeAmount.setPrefWidth(65);
         incomeAmount.setPrefHeight(5);
-        incomeAmount.setLayoutX(165);
+        incomeAmount.setLayoutX(175);
         incomeAmount.setLayoutY(62);
         Text saveTargetLabel = new Text(50, 110, "Savings Target:");
         savingTarget = new ComboBox();
         savingTarget.getItems().addAll("0%", "5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%",
                 "55%", "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "100%");
         savingTarget.setValue("0%");
-        savingTarget.setLayoutX(165);
+        savingTarget.setLayoutX(175);
         savingTarget.setLayoutY(94);
-        savingTarget.setPrefWidth(80);
+        savingTarget.setPrefWidth(90);
 
         Rectangle trackingBox = new Rectangle(25, 165, 250, 300);
         trackingBox.setStroke(Color.BLACK);
