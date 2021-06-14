@@ -118,22 +118,22 @@ public class BudgetTracker extends Application {
         date = new DatePicker();
         date.setPrefWidth(110);
         date.setPrefHeight(5);
-        date.setLayoutX(85);
+        date.setLayoutX(95);
         date.setLayoutY(202);
         date.setValue(LocalDate.now());
         Text amountLabel = new Text(50, 252, "Amount in Dollars:");
         amount = new TextField("0");
         amount.setPrefWidth(65);
         amount.setPrefHeight(5);
-        amount.setLayoutX(155);
+        amount.setLayoutX(175);
         amount.setLayoutY(234);
         Text directionLabel = new Text(50, 282, "Direction:");
         flowDirection = new ComboBox();
         flowDirection.getItems().addAll("Deposit", "Withdrawl");
         flowDirection.setValue("Choose");
-        flowDirection.setLayoutX(110);
+        flowDirection.setLayoutX(120);
         flowDirection.setLayoutY(266);
-        flowDirection.setPrefWidth(110);
+        flowDirection.setPrefWidth(130);
         Text expenseTypeLabel = new Text(50, 314, "Expense Type:");
         expenseCategory = new ComboBox();
         expenseCategory.getItems().addAll("Choose", "Housing Mortgage", "Housing Rent", "Home Insurance", "Property Taxes", "Utilities", "Food - Groceries", "Food - Resturaunts",
