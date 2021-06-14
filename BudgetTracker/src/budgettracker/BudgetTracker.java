@@ -5,6 +5,9 @@
  */
 package budgettracker;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -98,16 +101,16 @@ public class BudgetTracker extends Application {
         incomeAmount = new TextField("0");
         incomeAmount.setPrefWidth(65);
         incomeAmount.setPrefHeight(5);
-        incomeAmount.setLayoutX(175);
+        incomeAmount.setLayoutX(165);
         incomeAmount.setLayoutY(62);
         Text saveTargetLabel = new Text(50, 110, "Savings Target:");
         savingTarget = new ComboBox();
         savingTarget.getItems().addAll("0%", "5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%",
                 "55%", "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "100%");
         savingTarget.setValue("0%");
-        savingTarget.setLayoutX(175);
+        savingTarget.setLayoutX(165);
         savingTarget.setLayoutY(94);
-        savingTarget.setPrefWidth(90);
+        savingTarget.setPrefWidth(80);
 
         Rectangle trackingBox = new Rectangle(25, 165, 250, 300);
         trackingBox.setStroke(Color.BLACK);
@@ -118,22 +121,22 @@ public class BudgetTracker extends Application {
         date = new DatePicker();
         date.setPrefWidth(110);
         date.setPrefHeight(5);
-        date.setLayoutX(95);
+        date.setLayoutX(85);
         date.setLayoutY(202);
         date.setValue(LocalDate.now());
         Text amountLabel = new Text(50, 252, "Amount in Dollars:");
         amount = new TextField("0");
         amount.setPrefWidth(65);
         amount.setPrefHeight(5);
-        amount.setLayoutX(175);
+        amount.setLayoutX(155);
         amount.setLayoutY(234);
         Text directionLabel = new Text(50, 282, "Direction:");
         flowDirection = new ComboBox();
         flowDirection.getItems().addAll("Deposit", "Withdrawl");
         flowDirection.setValue("Choose");
-        flowDirection.setLayoutX(120);
+        flowDirection.setLayoutX(110);
         flowDirection.setLayoutY(266);
-        flowDirection.setPrefWidth(130);
+        flowDirection.setPrefWidth(110);
         Text expenseTypeLabel = new Text(50, 314, "Expense Type:");
         expenseCategory = new ComboBox();
         expenseCategory.getItems().addAll("Choose", "Housing Mortgage", "Housing Rent", "Home Insurance", "Property Taxes", "Utilities", "Food - Groceries", "Food - Resturaunts",
@@ -542,7 +545,6 @@ public class BudgetTracker extends Application {
             a.setContentText("Please select deposit type");
             a.show();
         }
-
         int biweekIncome = Integer.parseInt(incomeAmount.getText());
         String targets = savingTarget.getValue().toString();
         String noPercentT = targets.replace("%", "");
@@ -572,7 +574,6 @@ public class BudgetTracker extends Application {
         monthlyTotal = monthlyInc + numbers;
         double goalPercent;
         double goalPercentRounded;
-
         goalPercent = (monthlyTotal / goal) * 100;
         if (targetSaved == 0) {
             goalPercentRounded = 100;
@@ -1284,7 +1285,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (marAmount.getFill() != null && aprAmount.getFill()!= null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1476,7 +1477,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (aprAmount.getFill() != null && mayAmount.getFill()!= null) {
+            if (aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1491,7 +1492,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null) {
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1673,7 +1674,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (mayAmount.getFill() != null && junAmount.getFill()!= null) {
+            if (mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1688,11 +1689,12 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (febAmount.getFill()!= null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
+            if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1874,7 +1876,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (junAmount.getFill() != null && julAmount.getFill()!= null) {
+            if (junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -1889,16 +1891,17 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (marAmount.getFill()!= null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
-                monthlyTotal += monthlyInc;
-                goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (febAmount.getFill()!= null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill()!=null) {
+            if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
+                monthlyTotal += monthlyInc;
+                goalPercent = (monthlyTotal / goal) * 100;
+                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2080,7 +2083,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (julAmount.getFill() != null && augAmount.getFill()!= null) {
+            if (julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2095,21 +2098,22 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (aprAmount.getFill()!= null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
-                monthlyTotal += monthlyInc;
-                goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (marAmount.getFill()!= null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
+            if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (febAmount.getFill()!= null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill()!=null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill()!=null && augAmount.getFill() != null) {
+            if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
+                monthlyTotal += monthlyInc;
+                goalPercent = (monthlyTotal / goal) * 100;
+                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2291,7 +2295,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (augAmount.getFill() != null && sepAmount.getFill()!= null) {
+            if (augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2306,26 +2310,27 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (mayAmount.getFill()!= null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
-                monthlyTotal += monthlyInc;
-                goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (aprAmount.getFill()!= null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
+            if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (marAmount.getFill()!= null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill()!=null) {
+            if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (febAmount.getFill()!= null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill()!=null && sepAmount.getFill() != null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill()!=null && augAmount.getFill() != null && sepAmount.getFill() != null) {
+            if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
+                monthlyTotal += monthlyInc;
+                goalPercent = (monthlyTotal / goal) * 100;
+                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2507,7 +2512,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (sepAmount.getFill() != null && octAmount.getFill()!= null) {
+            if (sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2522,31 +2527,32 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (junAmount.getFill()!= null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
-                monthlyTotal += monthlyInc;
-                goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (mayAmount.getFill()!= null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
+            if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (aprAmount.getFill()!= null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill()!=null) {
+            if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (marAmount.getFill()!= null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill()!=null && octAmount.getFill() != null) {
+            if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (febAmount.getFill()!= null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill()!=null && sepAmount.getFill() != null && octAmount.getFill() != null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill()!=null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
+            if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
+                monthlyTotal += monthlyInc;
+                goalPercent = (monthlyTotal / goal) * 100;
+                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2728,7 +2734,7 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (octAmount.getFill() != null && novAmount.getFill()!= null) {
+            if (octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -2743,31 +2749,32 @@ public class BudgetTracker extends Application {
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (julAmount.getFill()!= null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
-                monthlyTotal += monthlyInc;
-                goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
-            } if (junAmount.getFill()!= null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
+            if (julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (mayAmount.getFill()!= null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill()!=null) {
+            if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (aprAmount.getFill()!= null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill()!=null && novAmount.getFill() != null) {
+            if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (marAmount.getFill()!= null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill()!=null && octAmount.getFill() != null && novAmount.getFill() != null) {
+            if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
             }
-            if (janAmount.getFill()!= null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill()!=null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
+            if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
+                monthlyTotal += monthlyInc;
+                goalPercent = (monthlyTotal / goal) * 100;
+                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+            }
+            if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
@@ -3090,9 +3097,22 @@ public class BudgetTracker extends Application {
         novAmount.setFill(null);
         decAmount.setFill(null);
 
+        goal1.setText("");
+        goal2.setText("");
+        goal3.setText("");
+
+        try {
+            String txt = "budget.txt";
+            FileWriter gone = new FileWriter(txt, false);
+            PrintWriter whipeall = new PrintWriter(gone, false);
+            whipeall.flush();
+            gone.close();
+            whipeall.close();
+        } catch (IOException e) {
+        }
     }
 
- /*
+    /*
     save button method
     
     This should pull the array items from wherever update stores and puts them in an integrated text file. an example of how to do this is the dungeons and damned application I put in discord
