@@ -5,6 +5,8 @@
  */
 package budgettracker;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +52,8 @@ public class BudgetTracker extends Application {
     public Text meeting;
     private static double numbers;
     public double monthlyTotal;
+    public int targetSaved;
+    public double goalPercentRounded;
 
     public static Line janFeb;
     public static Line febMar;
@@ -182,18 +186,21 @@ public class BudgetTracker extends Application {
         goalLabel.setFill(Color.BLUE);
         Text goal1Label = new Text(325, 85, "Goal 1:");
         goal1 = new TextArea();
+        goal1.setText("Set Goal");
         goal1.setPrefWidth(1000);
         goal1.setPrefHeight(5);
         goal1.setLayoutX(375);
         goal1.setLayoutY(62);
         Text goal2Label = new Text(325, 150, "Goal 2:");
         goal2 = new TextArea();
+        goal2.setText("Set Goal");
         goal2.setPrefWidth(1000);
         goal2.setPrefHeight(5);
         goal2.setLayoutX(375);
         goal2.setLayoutY(127);
         Text goal3Label = new Text(325, 215, "Goal 3:");
         goal3 = new TextArea();
+        goal3.setText("Set Goal");
         goal3.setPrefWidth(1000);
         goal3.setPrefHeight(5);
         goal3.setLayoutX(375);
@@ -223,6 +230,8 @@ public class BudgetTracker extends Application {
         Text budgetChartBoxLabel = new Text(550, 515, "Goal Achievement YTD - Current Balance and Percent of Goal Attained");
         budgetChartBoxLabel.setFill(Color.BLUE);
 
+      
+        
         Line horizAxis = new Line();
         horizAxis.setStartX(75);
         horizAxis.setStartY(820);
@@ -292,199 +301,199 @@ public class BudgetTracker extends Application {
 
         janPoint = new Circle();
         janPoint.setCenterX(120.0);
-        janPoint.setCenterY(670.0);
+        janPoint.setCenterY(510.0);
         janPoint.setRadius(5.0);
         janPoint.setStroke(null);
         janPoint.setFill(null);
 
         febPoint = new Circle();
         febPoint.setCenterX(228.0);
-        febPoint.setCenterY(670.0);
+        febPoint.setCenterY(510.0);
         febPoint.setRadius(5.0);
         febPoint.setStroke(null);
         febPoint.setFill(null);
 
         marPoint = new Circle();
         marPoint.setCenterX(336.0);
-        marPoint.setCenterY(670.0);
+        marPoint.setCenterY(510.0);
         marPoint.setRadius(5.0);
         marPoint.setStroke(null);
         marPoint.setFill(null);
 
         aprPoint = new Circle();
         aprPoint.setCenterX(444.0);
-        aprPoint.setCenterY(670.0);
+        aprPoint.setCenterY(510.0);
         aprPoint.setRadius(5.0);
         aprPoint.setStroke(null);
         aprPoint.setFill(null);
 
         mayPoint = new Circle();
         mayPoint.setCenterX(572.0);
-        mayPoint.setCenterY(670.0);
+        mayPoint.setCenterY(510.0);
         mayPoint.setRadius(5.0);
         mayPoint.setStroke(null);
         mayPoint.setFill(null);
 
         junPoint = new Circle();
         junPoint.setCenterX(660.0);
-        junPoint.setCenterY(670.0);
+        junPoint.setCenterY(510.0);
         junPoint.setRadius(5.0);
         junPoint.setStroke(null);
         junPoint.setFill(null);
 
         julPoint = new Circle();
         julPoint.setCenterX(768.0);
-        julPoint.setCenterY(670.0);
+        julPoint.setCenterY(510.0);
         julPoint.setRadius(5.0);
         julPoint.setStroke(null);
         julPoint.setFill(null);
 
         augPoint = new Circle();
         augPoint.setCenterX(876.0);
-        augPoint.setCenterY(670.0);
+        augPoint.setCenterY(510.0);
         augPoint.setRadius(5.0);
         augPoint.setStroke(null);
         augPoint.setFill(null);
 
         sepPoint = new Circle();
         sepPoint.setCenterX(984.0);
-        sepPoint.setCenterY(670.0);
+        sepPoint.setCenterY(510.0);
         sepPoint.setRadius(5.0);
         sepPoint.setStroke(null);
         sepPoint.setFill(null);
 
         octPoint = new Circle();
         octPoint.setCenterX(1092.0);
-        octPoint.setCenterY(670.0);
+        octPoint.setCenterY(510.0);
         octPoint.setRadius(5.0);
         octPoint.setStroke(null);
         octPoint.setFill(null);
 
         novPoint = new Circle();
         novPoint.setCenterX(1200.0);
-        novPoint.setCenterY(670.0);
+        novPoint.setCenterY(510.0);
         novPoint.setRadius(5.0);
         novPoint.setStroke(null);
         novPoint.setFill(null);
 
         decPoint = new Circle();
         decPoint.setCenterX(1308.0);
-        decPoint.setCenterY(670.0);
+        decPoint.setCenterY(510.0);
         decPoint.setRadius(5.0);
         decPoint.setStroke(null);
         decPoint.setFill(null);
 
         janFeb = new Line();
         janFeb.setStartX(120);
-        janFeb.setStartY(670);
+        janFeb.setStartY(510);
         janFeb.setEndX(228);
         janFeb.setEndY(670);
         janFeb.setStroke(null);
 
         febMar = new Line();
         febMar.setStartX(228);
-        febMar.setStartY(670);
+        febMar.setStartY(510);
         febMar.setEndX(336);
         febMar.setEndY(670);
         febMar.setStroke(null);
 
         marApr = new Line();
         marApr.setStartX(336);
-        marApr.setStartY(670);
+        marApr.setStartY(510);
         marApr.setEndX(444);
         marApr.setEndY(670);
         marApr.setStroke(null);
 
         aprMay = new Line();
         aprMay.setStartX(444);
-        aprMay.setStartY(670);
+        aprMay.setStartY(510);
         aprMay.setEndX(572);
         aprMay.setEndY(670);
         aprMay.setStroke(null);
 
         mayJun = new Line();
         mayJun.setStartX(572);
-        mayJun.setStartY(670);
+        mayJun.setStartY(510);
         mayJun.setEndX(660);
         mayJun.setEndY(670);
         mayJun.setStroke(null);
 
         junJul = new Line();
         junJul.setStartX(660);
-        junJul.setStartY(670);
+        junJul.setStartY(510);
         junJul.setEndX(768);
         junJul.setEndY(670);
         junJul.setStroke(null);
 
         julAug = new Line();
         julAug.setStartX(768);
-        julAug.setStartY(670);
+        julAug.setStartY(510);
         julAug.setEndX(876);
         julAug.setEndY(670);
         julAug.setStroke(null);
 
         augSep = new Line();
         augSep.setStartX(876);
-        augSep.setStartY(670);
+        augSep.setStartY(510);
         augSep.setEndX(984);
         augSep.setEndY(670);
         augSep.setStroke(null);
 
         sepOct = new Line();
         sepOct.setStartX(984);
-        sepOct.setStartY(670);
+        sepOct.setStartY(510);
         sepOct.setEndX(1092);
         sepOct.setEndY(670);
         sepOct.setStroke(null);
 
         octNov = new Line();
         octNov.setStartX(1092);
-        octNov.setStartY(670);
+        octNov.setStartY(510);
         octNov.setEndX(1200);
         octNov.setEndY(670);
         octNov.setStroke(null);
 
         novDec = new Line();
         novDec.setStartX(1200);
-        novDec.setStartY(670);
+        novDec.setStartY(510);
         novDec.setEndX(1308);
         novDec.setEndY(670);
         novDec.setStroke(null);
 
-        janAmount = new Text(100, 800, "");
+        janAmount = new Text(100, 510, "0");
         janAmount.setFill(null);
 
-        febAmount = new Text(208, 800, "");
+        febAmount = new Text(208, 510, "0");
         febAmount.setFill(null);
 
-        marAmount = new Text(316, 800, "");
+        marAmount = new Text(316, 510, "0");
         marAmount.setFill(null);
 
-        aprAmount = new Text(424, 800, "");
+        aprAmount = new Text(424, 510, "0");
         aprAmount.setFill(null);
 
-        mayAmount = new Text(532, 800, "");
+        mayAmount = new Text(532, 510, "0");
         mayAmount.setFill(null);
 
-        junAmount = new Text(640, 800, "");
+        junAmount = new Text(640, 510, "0");
         junAmount.setFill(null);
 
-        julAmount = new Text(748, 800, "");
+        julAmount = new Text(748, 510, "0");
         julAmount.setFill(null);
 
-        augAmount = new Text(856, 800, "");
+        augAmount = new Text(856, 510, "0");
         augAmount.setFill(null);
 
-        sepAmount = new Text(964, 800, "");
+        sepAmount = new Text(964, 510, "0");
         sepAmount.setFill(null);
 
-        octAmount = new Text(1072, 800, "");
+        octAmount = new Text(1072, 510, "0");
         octAmount.setFill(null);
 
-        novAmount = new Text(1180, 800, "");
+        novAmount = new Text(1180, 510, "0");
         novAmount.setFill(null);
 
-        decAmount = new Text(1288, 800, "");
+        decAmount = new Text(1288, 510, "0");
         decAmount.setFill(null);
 
         Group backgroundItems = new Group(backgroundBox, backgroundLabel, incomeLabel, incomeAmount, saveTargetLabel, savingTarget);
@@ -548,7 +557,7 @@ public class BudgetTracker extends Application {
         int biweekIncome = Integer.parseInt(incomeAmount.getText());
         String targets = savingTarget.getValue().toString();
         String noPercentT = targets.replace("%", "");
-        int targetSaved = Integer.parseInt(noPercentT);
+        targetSaved = Integer.parseInt(noPercentT);
         int monthlyInc = biweekIncome * 2;
         double actualTSaved = .01 * targetSaved;
         double goal = monthlyInc * actualTSaved;
@@ -573,11 +582,11 @@ public class BudgetTracker extends Application {
 
         monthlyTotal = monthlyInc + numbers;
         double goalPercent;
-        double goalPercentRounded;
         goalPercent = (monthlyTotal / goal) * 100;
         if (targetSaved == 0) {
             goalPercentRounded = 100;
         } else {
+
             goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
         }
 
@@ -736,7 +745,13 @@ public class BudgetTracker extends Application {
             if (janAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             febAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -913,12 +928,22 @@ public class BudgetTracker extends Application {
             if (febAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             marAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -1095,18 +1120,33 @@ public class BudgetTracker extends Application {
             if (marAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
 
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             aprAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -1283,22 +1323,42 @@ public class BudgetTracker extends Application {
             if (aprAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             mayAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -1475,27 +1535,52 @@ public class BudgetTracker extends Application {
             if (mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             junAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -1672,32 +1757,62 @@ public class BudgetTracker extends Application {
             if (junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             julAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -1874,37 +1989,72 @@ public class BudgetTracker extends Application {
             if (julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             augAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -2081,42 +2231,82 @@ public class BudgetTracker extends Application {
             if (augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             sepAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -2293,47 +2483,92 @@ public class BudgetTracker extends Application {
             if (sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             octAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -2510,52 +2745,102 @@ public class BudgetTracker extends Application {
             if (octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             novAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -2732,52 +3017,102 @@ public class BudgetTracker extends Application {
             if (novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null && aprAmount.getFill() != null && mayAmount.getFill() != null && junAmount.getFill() != null && julAmount.getFill() != null && augAmount.getFill() != null && sepAmount.getFill() != null && octAmount.getFill() != null && novAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-                goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                if (targetSaved == 0) {
+                    goalPercentRounded = 100;
+                } else {
+
+                    goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
+                }
             }
             decAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
 
@@ -3031,14 +3366,447 @@ public class BudgetTracker extends Application {
     }
 
     public void save(ActionEvent event) {
+        delete.setOnAction(this::delete);
+        try (FileWriter writer = new FileWriter("BudgetDetails.txt")) {
+            writer.write(incomeAmount.getText());
+            writer.write("\r\n");
+            writer.write(String.valueOf(targetSaved));
+            writer.write("\r\n");
+            writer.write(String.valueOf(numbers));
+            writer.write("\r\n");
+            writer.write(String.valueOf(monthlyTotal));
+            writer.write("\r\n");
+            writer.write(String.valueOf(goalPercentRounded));
+            writer.write("\r\n");
+            writer.write(janAmount.getText());
+            writer.write("\r\n");
+            writer.write(febAmount.getText());
+            writer.write("\r\n");
+            writer.write(marAmount.getText());
+            writer.write("\r\n");
+            writer.write(aprAmount.getText());
+            writer.write("\r\n");
+            writer.write(mayAmount.getText());
+            writer.write("\r\n");
+            writer.write(junAmount.getText());
+            writer.write("\r\n");
+            writer.write(julAmount.getText());
+            writer.write("\r\n");
+            writer.write(augAmount.getText());
+            writer.write("\r\n");
+            writer.write(sepAmount.getText());
+            writer.write("\r\n");
+            writer.write(octAmount.getText());
+            writer.write("\r\n");
+            writer.write(novAmount.getText());
+            writer.write("\r\n");
+            writer.write(decAmount.getText());
+            writer.write("\r\n");
 
+            if (underperforming.getFill() == Color.RED) {
+                writer.write("under");
+                writer.write("\r\n");
+            } else if (meeting.getFill() == Color.GREEN) {
+                writer.write("meeting");
+                writer.write("\r\n");
+            } else if (overperforming.getFill() == Color.GREEN) {
+                writer.write("over");
+                writer.write("\r\n");
+            }else{
+                writer.write("neither");
+                writer.write("\r\n");
+            }
+            writer.write(String.valueOf(janPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(febPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(marPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(aprPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(mayPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(junPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(julPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(augPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(sepPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(octPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(novPoint.getCenterY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(decPoint.getCenterY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(janAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(febAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(marAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(aprAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(mayAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(junAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(julAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(augAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(sepAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(octAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(novAmount.getY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(decAmount.getY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(janFeb.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(janFeb.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(febMar.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(febMar.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(marApr.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(marApr.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(aprMay.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(aprMay.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(mayJun.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(mayJun.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(junJul.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(junJul.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(julAug.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(julAug.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(augSep.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(augSep.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(sepOct.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(sepOct.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(octNov.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(octNov.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(String.valueOf(novDec.getStartY()));
+            writer.write("\r\n");
+            writer.write(String.valueOf(novDec.getEndY()));
+            writer.write("\r\n");
+
+            writer.write(goal1.getText());
+            writer.write("\r\n");
+            writer.write(goal2.getText());
+            writer.write("\r\n");
+            writer.write(goal3.getText());
+            writer.write("\r\n");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Save successful!!");
     }
 
     public void load(ActionEvent event) {
+        try {
+            String txt = "BudgetDetails.txt";
+            FileReader saves = new FileReader(txt);
+            BufferedReader buff = new BufferedReader(saves);
+            incomeAmount.setText(buff.readLine());
+            String savingsPerc = buff.readLine();
+            savingTarget.setValue(savingsPerc + "%");
+            targetSaved = Integer.parseInt(savingsPerc);
+            numbers = Double.parseDouble(buff.readLine());
+            monthlyTotal = Double.parseDouble(buff.readLine());
+            goalPercentRounded = Double.parseDouble(buff.readLine());
+            janAmount.setText(buff.readLine());
+            febAmount.setText(buff.readLine());
+            marAmount.setText(buff.readLine());
+            aprAmount.setText(buff.readLine());
+            mayAmount.setText(buff.readLine());
+            junAmount.setText(buff.readLine());
+            julAmount.setText(buff.readLine());
+            augAmount.setText(buff.readLine());
+            sepAmount.setText(buff.readLine());
+            octAmount.setText(buff.readLine());
+            novAmount.setText(buff.readLine());
+            decAmount.setText(buff.readLine());
+
+            String standing = buff.readLine();
+            if (standing.equals("under")) {
+                underperforming.setStroke(Color.RED);
+                underperforming.setFill(Color.RED);
+            } else if (standing.equals("meeting")) {
+                meeting.setStroke(Color.GREEN);
+                meeting.setFill(Color.GREEN);
+            } else if (standing.equals("over")) {
+                overperforming.setStroke(Color.GREEN);
+                overperforming.setFill(Color.GREEN);
+            }
+
+            janPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            febPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            marPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            aprPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            mayPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            junPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            julPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            augPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            sepPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            octPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            novPoint.setCenterY(Double.parseDouble(buff.readLine()));
+            decPoint.setCenterY(Double.parseDouble(buff.readLine()));
+
+            janAmount.setY(Double.parseDouble(buff.readLine()));
+            febAmount.setY(Double.parseDouble(buff.readLine()));
+            marAmount.setY(Double.parseDouble(buff.readLine()));
+            aprAmount.setY(Double.parseDouble(buff.readLine()));
+            mayAmount.setY(Double.parseDouble(buff.readLine()));
+            junAmount.setY(Double.parseDouble(buff.readLine()));
+            julAmount.setY(Double.parseDouble(buff.readLine()));
+            augAmount.setY(Double.parseDouble(buff.readLine()));
+            sepAmount.setY(Double.parseDouble(buff.readLine()));
+            octAmount.setY(Double.parseDouble(buff.readLine()));
+            novAmount.setY(Double.parseDouble(buff.readLine()));
+            decAmount.setY(Double.parseDouble(buff.readLine()));
+
+            if (janPoint.getCenterY() != 510.0) {
+                janAmount.setFill(Color.BLACK);
+                if (janPoint.getCenterY() > 670.0) {
+                    janPoint.setStroke(Color.RED);
+                    janPoint.setFill(Color.RED);
+                } else {
+                    janPoint.setStroke(Color.GREEN);
+                    janPoint.setFill(Color.GREEN);
+                }
+            }
+            if (febPoint.getCenterY() != 510.0) {
+
+                febAmount.setFill(Color.BLACK);
+                if (febPoint.getCenterY() > 670) {
+                    febPoint.setStroke(Color.RED);
+                    febPoint.setFill(Color.RED);
+                } else {
+                    febPoint.setStroke(Color.GREEN);
+                    febPoint.setFill(Color.GREEN);
+                }
+            }
+            if (marPoint.getCenterY() != 510.0) {
+
+                marAmount.setFill(Color.BLACK);
+                if (marPoint.getCenterY() > 670) {
+                    marPoint.setStroke(Color.RED);
+                    marPoint.setFill(Color.RED);
+                } else {
+                    marPoint.setStroke(Color.GREEN);
+                    marPoint.setFill(Color.GREEN);
+                }
+            }
+            if (aprPoint.getCenterY() != 510.0) {
+
+                aprAmount.setFill(Color.BLACK);
+                if (aprPoint.getCenterY() > 670) {
+                    aprPoint.setStroke(Color.RED);
+                    aprPoint.setFill(Color.RED);
+                } else {
+                    aprPoint.setStroke(Color.GREEN);
+                    aprPoint.setFill(Color.GREEN);
+                }
+            }
+            if (mayPoint.getCenterY() != 510.0) {
+
+                mayAmount.setFill(Color.BLACK);
+                if (mayPoint.getCenterY() > 670) {
+                    mayPoint.setStroke(Color.RED);
+                    mayPoint.setFill(Color.RED);
+                } else {
+                    mayPoint.setStroke(Color.GREEN);
+                    mayPoint.setFill(Color.GREEN);
+                }
+            }
+            if (junPoint.getCenterY() != 510.0) {
+
+                junAmount.setFill(Color.BLACK);
+                if (junPoint.getCenterY() > 670) {
+                    junPoint.setStroke(Color.RED);
+                    junPoint.setFill(Color.RED);
+                } else {
+                    junPoint.setStroke(Color.GREEN);
+                    junPoint.setFill(Color.GREEN);
+                }
+            }
+            if (julPoint.getCenterY() != 510.0) {
+
+                julAmount.setFill(Color.BLACK);
+                if (julPoint.getCenterY() > 670) {
+                    julPoint.setStroke(Color.RED);
+                    julPoint.setFill(Color.RED);
+                } else {
+                    julPoint.setStroke(Color.GREEN);
+                    julPoint.setFill(Color.GREEN);
+                }
+            }
+            if (augPoint.getCenterY() != 510.0) {
+
+                augAmount.setFill(Color.BLACK);
+                if (augPoint.getCenterY() > 670) {
+                    augPoint.setStroke(Color.RED);
+                    augPoint.setFill(Color.RED);
+                } else {
+                    augPoint.setStroke(Color.GREEN);
+                    augPoint.setFill(Color.GREEN);
+                }
+            }
+            if (sepPoint.getCenterY() != 510.0) {
+
+                sepAmount.setFill(Color.BLACK);
+                if (sepPoint.getCenterY() > 670) {
+                    sepPoint.setStroke(Color.RED);
+                    sepPoint.setFill(Color.RED);
+                } else {
+                    sepPoint.setStroke(Color.GREEN);
+                    sepPoint.setFill(Color.GREEN);
+                }
+            }
+            if (octPoint.getCenterY() != 510.0) {
+
+                octAmount.setFill(Color.BLACK);
+                if (octPoint.getCenterY() > 670) {
+                    octPoint.setStroke(Color.RED);
+                    octPoint.setFill(Color.RED);
+                } else {
+                    octPoint.setStroke(Color.GREEN);
+                    octPoint.setFill(Color.GREEN);
+                }
+            }
+            if (novPoint.getCenterY() != 510.0) {
+
+                novAmount.setFill(Color.BLACK);
+                if (novPoint.getCenterY() > 670) {
+                    novPoint.setStroke(Color.RED);
+                    novPoint.setFill(Color.RED);
+                } else {
+                    novPoint.setStroke(Color.GREEN);
+                    novPoint.setFill(Color.GREEN);
+                }
+            }
+            if (decPoint.getCenterY() != 510.0) {
+
+                decAmount.setFill(Color.BLACK);
+                if (decPoint.getCenterY() > 670) {
+                    decPoint.setStroke(Color.RED);
+                    decPoint.setFill(Color.RED);
+                } else {
+                    decPoint.setStroke(Color.GREEN);
+                    decPoint.setFill(Color.GREEN);
+                }
+            }
+            janFeb.setStartY(Double.parseDouble(buff.readLine()));
+            janFeb.setEndY(Double.parseDouble(buff.readLine()));
+            febMar.setStartY(Double.parseDouble(buff.readLine()));
+            febMar.setEndY(Double.parseDouble(buff.readLine()));
+            marApr.setStartY(Double.parseDouble(buff.readLine()));
+            marApr.setEndY(Double.parseDouble(buff.readLine()));
+            aprMay.setStartY(Double.parseDouble(buff.readLine()));
+            aprMay.setEndY(Double.parseDouble(buff.readLine()));
+            mayJun.setStartY(Double.parseDouble(buff.readLine()));
+            mayJun.setEndY(Double.parseDouble(buff.readLine()));
+            junJul.setStartY(Double.parseDouble(buff.readLine()));
+            junJul.setEndY(Double.parseDouble(buff.readLine()));
+            julAug.setStartY(Double.parseDouble(buff.readLine()));
+            julAug.setEndY(Double.parseDouble(buff.readLine()));
+            augSep.setStartY(Double.parseDouble(buff.readLine()));
+            augSep.setEndY(Double.parseDouble(buff.readLine()));
+            sepOct.setStartY(Double.parseDouble(buff.readLine()));
+            sepOct.setEndY(Double.parseDouble(buff.readLine()));
+            octNov.setStartY(Double.parseDouble(buff.readLine()));
+            octNov.setEndY(Double.parseDouble(buff.readLine()));
+            novDec.setStartY(Double.parseDouble(buff.readLine()));
+            novDec.setEndY(Double.parseDouble(buff.readLine()));
+
+            if (janPoint.getFill() != null && febPoint.getFill() != null) {
+                janFeb.setStroke(Color.BLACK);
+            }
+            if (febPoint.getFill() != null && marPoint.getFill() != null) {
+                febMar.setStroke(Color.BLACK);
+            }
+            if (marPoint.getFill() != null && aprPoint.getFill() != null) {
+                marApr.setStroke(Color.BLACK);
+            }
+            if (aprPoint.getFill() != null && mayPoint.getFill() != null) {
+                aprMay.setStroke(Color.BLACK);
+            }
+            if (mayPoint.getFill() != null && junPoint.getFill() != null) {
+                mayJun.setStroke(Color.BLACK);
+            }
+            if (junPoint.getFill() != null && julPoint.getFill() != null) {
+                junJul.setStroke(Color.BLACK);
+            }
+            if (julPoint.getFill() != null && augPoint.getFill() != null) {
+                julAug.setStroke(Color.BLACK);
+            }
+            if (augPoint.getFill() != null && sepPoint.getFill() != null) {
+                augSep.setStroke(Color.BLACK);
+            }
+            if (sepPoint.getFill() != null && octPoint.getFill() != null) {
+                sepOct.setStroke(Color.BLACK);
+            }
+            if (octPoint.getFill() != null && novPoint.getFill() != null) {
+                octNov.setStroke(Color.BLACK);
+            }
+            if (novPoint.getFill() != null && decPoint.getFill() != null) {
+                novDec.setStroke(Color.BLACK);
+            }
+
+            goal1.setText(buff.readLine());
+            goal2.setText(buff.readLine());
+            goal3.setText(buff.readLine());
+
+            saves.close();
+            buff.close();
+        } catch (IOException e) {
+        }
+     
 
     }
 
     public void delete(ActionEvent event) {
+        try {
+            String txt = "BudgetDetails.txt";
+            FileWriter gone = new FileWriter(txt, false);
+            PrintWriter whipeall = new PrintWriter(gone, false);
+            whipeall.flush();
+            gone.close();
+            whipeall.close();
+        } catch (IOException e) {
+        }
         numbers = 0;
         janPoint.setStroke(null);
         janPoint.setFill(null);
@@ -3064,6 +3832,19 @@ public class BudgetTracker extends Application {
         novPoint.setFill(null);
         decPoint.setStroke(null);
         decPoint.setFill(null);
+
+        janPoint.setCenterY(510);
+        febPoint.setCenterY(510);
+        marPoint.setCenterY(510);
+        aprPoint.setCenterY(510);
+        mayPoint.setCenterY(510);
+        junPoint.setCenterY(510);
+        julPoint.setCenterY(510);
+        augPoint.setCenterY(510);
+        sepPoint.setCenterY(510);
+        octPoint.setCenterY(510);
+        novPoint.setCenterY(510);
+        decPoint.setCenterY(510);
 
         janFeb.setStroke(null);
         febMar.setStroke(null);
@@ -3097,42 +3878,28 @@ public class BudgetTracker extends Application {
         novAmount.setFill(null);
         decAmount.setFill(null);
 
-        goal1.setText("");
-        goal2.setText("");
-        goal3.setText("");
+        janAmount.setY(510);
+        febAmount.setY(510);
+        marAmount.setY(510);
+        aprAmount.setY(510);
+        mayAmount.setY(510);
+        junAmount.setY(510);
+        julAmount.setY(510);
+        augAmount.setY(510);
+        sepAmount.setY(510);
+        octAmount.setY(510);
+        novAmount.setY(510);
+        decAmount.setY(510);
 
-        try {
-            String txt = "budget.txt";
-            FileWriter gone = new FileWriter(txt, false);
-            PrintWriter whipeall = new PrintWriter(gone, false);
-            whipeall.flush();
-            gone.close();
-            whipeall.close();
-        } catch (IOException e) {
-        }
+        goal1.setText("Set Goal");
+        goal2.setText("Set Goal");
+        goal3.setText("Set Goal");
+        
+        save.setOnAction(this::delete);
+        load.setOnAction(this::delete);
+        
     }
 
-    /*
-    save button method
-    
-    This should pull the array items from wherever update stores and puts them in an integrated text file. an example of how to do this is the dungeons and damned application I put in discord
-    
-     */
- /*
-    load button method
-    
-    this should pull all the lines from the integrated text file and replace them in the array update uses and then restore all the data points and budget status
-    an example of loading and saving to integrated text files is in the dungeons and damned app in discord
-    
-     */
- /*
-    delete button method
-    
-    this should clear all data stored in the integrated text file
-    
-    
-     */
-    // the budget goals is just to include goals and doesn't link to anything, it is basically finished.
     /**
      * @param args the command line arguments
      */
