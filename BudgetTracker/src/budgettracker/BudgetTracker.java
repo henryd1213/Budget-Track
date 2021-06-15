@@ -162,12 +162,12 @@ public class BudgetTracker extends Application {
         update.setId("update");
         update.setLayoutX(50);
         update.setLayoutY(420);
-        update.setOnAction(this::update);
+        update.setOnAction(this::dataCheck);
         save = new Button("Save");
         save.setId("save");
         save.setLayoutX(114);
         save.setLayoutY(420);
-        save.setOnAction(this::save);
+        save.setOnAction(this::dataCheck);
         load = new Button("Load");
         load.setId("load");
         load.setLayoutX(165);
@@ -3334,6 +3334,7 @@ public class BudgetTracker extends Application {
                 incorrect = false;
             } catch (NumberFormatException nfe) {
                 incomeTest = "0";
+                incomeAmount.setText("0");
                 Alert a = new Alert(AlertType.ERROR);
                 a.setContentText("Invalid data type");
                 a.show();
@@ -3348,6 +3349,7 @@ public class BudgetTracker extends Application {
                 incorrect2 = false;
             } catch (NumberFormatException nfe) {
                 amountTest = "0";
+                amount.setText("0");
                 Alert a = new Alert(AlertType.ERROR);
                 a.setContentText("Invalid data type");
                 a.show();
@@ -3359,14 +3361,14 @@ public class BudgetTracker extends Application {
                 update.setOnAction(this::update);
 
             } else if ((event.getSource()).toString().contains("save")) {
-                save.setOnAction(this::save);
+                save();
+                //save.setOnAction(this::save);
 
             }
         }
     }
 
-    public void save(ActionEvent event) {
-        delete.setOnAction(this::delete);
+    public void save() {
         try (FileWriter writer = new FileWriter("BudgetDetails.txt")) {
             writer.write(incomeAmount.getText());
             writer.write("\r\n");
@@ -3535,10 +3537,12 @@ public class BudgetTracker extends Application {
     }
 
     public void load(ActionEvent event) {
+        
         try {
             String txt = "BudgetDetails.txt";
             FileReader saves = new FileReader(txt);
             BufferedReader buff = new BufferedReader(saves);
+           
             incomeAmount.setText(buff.readLine());
             String savingsPerc = buff.readLine();
             savingTarget.setValue(savingsPerc + "%");
@@ -3895,8 +3899,7 @@ public class BudgetTracker extends Application {
         goal2.setText("Set Goal");
         goal3.setText("Set Goal");
         
-        save.setOnAction(this::delete);
-        load.setOnAction(this::delete);
+      save();
         
     }
 
