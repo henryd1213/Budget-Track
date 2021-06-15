@@ -54,7 +54,7 @@ public class BudgetTracker extends Application {
     public double monthlyTotal;
     public int targetSaved;
     public double goalPercentRounded;
-
+    
     public static Line janFeb;
     public static Line febMar;
     public static Line marApr;
@@ -136,14 +136,15 @@ public class BudgetTracker extends Application {
         amount.setLayoutY(234);
         Text directionLabel = new Text(50, 282, "Direction:");
         flowDirection = new ComboBox();
-        flowDirection.getItems().addAll("Deposit", "Withdrawl");
+        flowDirection.getItems().addAll("Deposit", "Withdrawl", "Choose");
         flowDirection.setValue("Choose");
         flowDirection.setLayoutX(110);
         flowDirection.setLayoutY(266);
         flowDirection.setPrefWidth(110);
+        flowDirection.setOnAction(e -> boxSelection());
         Text expenseTypeLabel = new Text(50, 314, "Expense Type:");
         expenseCategory = new ComboBox();
-        expenseCategory.getItems().addAll("Choose", "Housing Mortgage", "Housing Rent", "Home Insurance", "Property Taxes", "Utilities", "Food - Groceries", "Food - Resturaunts",
+        expenseCategory.getItems().addAll("Housing Mortgage", "Housing Rent", "Home Insurance", "Property Taxes", "Utilities", "Food - Groceries", "Food - Resturaunts",
                 "Transportation - Car Payment", "Transportation - Fuel", "Transportation - Repairs", "Transportation - Insurance", "Transportation - licenses / Fees",
                 "Clothing", "Medical - Doctor Bills", "Medical - Medications", "Medical - Insurance", "Medical - Miscellaneous", "Personal", "Other");
         expenseCategory.setValue("Choose");
@@ -151,13 +152,15 @@ public class BudgetTracker extends Application {
         expenseCategory.setLayoutY(324);
         expenseCategory.setPrefWidth(220);
         expenseCategory.setPrefHeight(5);
+        expenseCategory.setOnAction(e -> boxSelection());
         Text savingTypeLabel = new Text(50, 372, "Deposit Type:");
         savingCategory = new ComboBox();
-        savingCategory.getItems().addAll("Choose", "Savings - General", "Emergency Fund", "College Fund", "Retirement Fund");
+        savingCategory.getItems().addAll("Savings - General", "Emergency Fund", "College Fund", "Retirement Fund");
         savingCategory.setValue("Choose");
         savingCategory.setLayoutX(50);
         savingCategory.setLayoutY(382);
         savingCategory.setPrefWidth(220);
+        savingCategory.setOnAction(e -> boxSelection());
         update = new Button("Update");
         update.setId("update");
         update.setLayoutX(50);
@@ -172,7 +175,7 @@ public class BudgetTracker extends Application {
         load.setId("load");
         load.setLayoutX(165);
         load.setLayoutY(420);
-        load.setOnAction(this::load);
+        load.setOnAction(this::Load);
         delete = new Button("Delete");
         delete.setId("delete");
         delete.setLayoutX(215);
@@ -523,6 +526,25 @@ public class BudgetTracker extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    public void boxSelection(){
+        String chosenExpense = expenseCategory.getValue().toString();
+        String chosenSavings = savingCategory.getValue().toString();
+        String chosenDirection = flowDirection.getValue().toString();
+        if(chosenDirection.contains("Withdraw")){
+            savingCategory.setDisable(true);
+            expenseCategory.setDisable(false);
+            savingCategory.setValue("Choose");
+        }else if(chosenDirection.contains("Deposit")){
+            savingCategory.setDisable(false);
+            expenseCategory.setDisable(true);
+            expenseCategory.setValue("Choose");
+        }else if(chosenExpense != "Choose"){
+            flowDirection.setValue("Withdrawl");
+        }else if(chosenSavings != "Choose"){
+            flowDirection.setValue("Deposit");
+        }
+    }
+
     public void dataCheck(ActionEvent event) {
         String incomeTest = incomeAmount.getText();
         boolean incorrect = true;
@@ -560,17 +582,18 @@ public class BudgetTracker extends Application {
             }
         }
     }
+    public void Load(ActionEvent event){
+        load();
+    }
+   
     public void update() {
         String chosenExpense = expenseCategory.getValue().toString();
         String chosenSavings = savingCategory.getValue().toString();
         String chosenDirection = flowDirection.getValue().toString();
         double enteredAmount = Double.parseDouble(amount.getText());
 
-        if (chosenDirection == "Choose") {
-            Alert a = new Alert(AlertType.ERROR);
-            a.setContentText("Please select Deposit or Withdrawl");
-            a.show();
-        } else if (chosenExpense != "Choose" && chosenSavings != "Choose") {
+        
+        if (chosenExpense != "Choose" && chosenSavings != "Choose") {
             expenseCategory.setValue("Choose");
             savingCategory.setValue("Choose");
             enteredAmount = 0;
@@ -587,7 +610,14 @@ public class BudgetTracker extends Application {
             Alert a = new Alert(AlertType.ERROR);
             a.setContentText("Please select deposit type");
             a.show();
+        } else if(chosenDirection == "Choose" && chosenSavings != "Choose"){
+            flowDirection.setValue("Deposit");
+            chosenDirection = "Deposit";
+        }else if(chosenDirection == "Choose" && chosenExpense != "Choose"){
+            flowDirection.setValue("Withdrawl");
+            chosenDirection = "Withdrawl";
         }
+        
         int biweekIncome = Integer.parseInt(incomeAmount.getText());
         String targets = savingTarget.getValue().toString();
         String noPercentT = targets.replace("%", "");
@@ -3282,7 +3312,10 @@ public class BudgetTracker extends Application {
         try (FileWriter writer = new FileWriter("BudgetDetails.txt")) {
             writer.write(incomeAmount.getText());
             writer.write("\r\n");
-            writer.write(String.valueOf(targetSaved));
+            String targets = savingTarget.getValue().toString();
+            String noPercentT = targets.replace("%", "");
+            writer.write(noPercentT);
+           // writer.write(String.valueOf(targetSaved));
             writer.write("\r\n");
             writer.write(String.valueOf(numbers));
             writer.write("\r\n");
@@ -3439,6 +3472,8 @@ public class BudgetTracker extends Application {
             writer.write("\r\n");
             writer.write(goal3.getText());
             writer.write("\r\n");
+            
+            
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -3446,7 +3481,7 @@ public class BudgetTracker extends Application {
         System.out.println("Save successful!!");
     }
 
-    public void load(ActionEvent event) {
+    public void load() {
 
         try {
             String txt = "BudgetDetails.txt";
@@ -3698,7 +3733,6 @@ public class BudgetTracker extends Application {
             if (novPoint.getFill() != null && decPoint.getFill() != null) {
                 novDec.setStroke(Color.BLACK);
             }
-
             goal1.setText(buff.readLine());
             goal2.setText(buff.readLine());
             goal3.setText(buff.readLine());
@@ -3709,7 +3743,7 @@ public class BudgetTracker extends Application {
         }
     }
 
-    public void delete(ActionEvent event) {
+    public void delete(ActionEvent Event) {
         try {
             String txt = "BudgetDetails.txt";
             FileWriter gone = new FileWriter(txt, false);
@@ -3719,6 +3753,10 @@ public class BudgetTracker extends Application {
             whipeall.close();
         } catch (IOException e) {
         }
+        
+        
+        incomeAmount.setText("0");
+        amount.setText("0");
         numbers = 0;
         janPoint.setStroke(null);
         janPoint.setFill(null);
@@ -3806,8 +3844,19 @@ public class BudgetTracker extends Application {
         goal1.setText("Set Goal");
         goal2.setText("Set Goal");
         goal3.setText("Set Goal");
-
+ 
+        savingCategory.setValue("Choose");
+        expenseCategory.setValue("Choose");
+        flowDirection.setValue("Choose");
+        
+        //savingCategory.getSelectionModel().select("Choose");
+       // expenseCategory.getSelectionModel().select("Choose");
+       // flowDirection.getSelectionModel().select("Choose");
+        
+        savingCategory.setDisable(false);
+        expenseCategory.setDisable(false);
         save();
+        load();
     }
 
     /**
