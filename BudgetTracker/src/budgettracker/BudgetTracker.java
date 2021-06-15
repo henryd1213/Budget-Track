@@ -136,7 +136,7 @@ public class BudgetTracker extends Application {
         amount.setLayoutY(234);
         Text directionLabel = new Text(50, 282, "Direction:");
         flowDirection = new ComboBox();
-        flowDirection.getItems().addAll("Deposit", "Withdrawl", "Choose");
+        flowDirection.getItems().addAll("Deposit", "Withdrawl");
         flowDirection.setValue("Choose");
         flowDirection.setLayoutX(110);
         flowDirection.setLayoutY(266);
@@ -2337,7 +2337,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 10) {
                 sepPoint.setCenterY(805.0);
                 augSep.setEndY(805);
-                sepOct.setStartX(805);
+                sepOct.setStartY(805);
                 sepAmount.setY(820);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2345,7 +2345,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 20) {
                 sepPoint.setCenterY(790.0);
                 augSep.setEndY(790);
-                sepOct.setStartX(790);
+                sepOct.setStartY(790);
                 sepAmount.setY(805);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2353,7 +2353,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 30) {
                 sepPoint.setCenterY(775.0);
                 augSep.setEndY(775);
-                sepOct.setStartX(775);
+                sepOct.setStartY(775);
                 sepAmount.setY(790);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2361,7 +2361,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 40) {
                 sepPoint.setCenterY(760.0);
                 augSep.setEndY(760);
-                sepOct.setStartX(760);
+                sepOct.setStartY(760);
                 sepAmount.setY(775);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2369,7 +2369,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 50) {
                 sepPoint.setCenterY(745.0);
                 augSep.setEndY(745);
-                sepOct.setStartX(745);
+                sepOct.setStartY(745);
                 sepAmount.setY(760);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2377,7 +2377,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 60) {
                 sepPoint.setCenterY(730.0);
                 augSep.setEndY(730);
-                sepOct.setStartX(730);
+                sepOct.setStartY(730);
                 sepAmount.setY(745);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2385,7 +2385,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 70) {
                 sepPoint.setCenterY(715.0);
                 augSep.setEndY(715);
-                sepOct.setStartX(715);
+                sepOct.setStartY(715);
                 sepAmount.setY(730);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2393,7 +2393,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 80) {
                 sepPoint.setCenterY(700.0);
                 augSep.setEndY(700);
-                sepOct.setStartX(700);
+                sepOct.setStartY(700);
                 sepAmount.setY(715);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2401,7 +2401,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 90) {
                 sepPoint.setCenterY(685.0);
                 augSep.setEndY(685);
-                sepOct.setStartX(685);
+                sepOct.setStartY(685);
                 sepAmount.setY(700);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.RED);
@@ -2409,7 +2409,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 100) {
                 sepPoint.setCenterY(670.0);
                 augSep.setEndY(670);
-                sepOct.setStartX(670);
+                sepOct.setStartY(670);
                 sepAmount.setY(685);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2417,7 +2417,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 110) {
                 sepPoint.setCenterY(655.0);
                 augSep.setEndY(655);
-                sepOct.setStartX(655);
+                sepOct.setStartY(655);
                 sepAmount.setY(670);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2425,7 +2425,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 120) {
                 sepPoint.setCenterY(640.0);
                 augSep.setEndY(640);
-                sepOct.setStartX(640);
+                sepOct.setStartY(640);
                 sepAmount.setY(655);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2433,7 +2433,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 130) {
                 sepPoint.setCenterY(625.0);
                 augSep.setEndY(625);
-                sepOct.setStartX(625);
+                sepOct.setStartY(625);
                 sepAmount.setY(640);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2441,7 +2441,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 140) {
                 sepPoint.setCenterY(610.0);
                 augSep.setEndY(610);
-                sepOct.setStartX(610);
+                sepOct.setStartY(610);
                 sepAmount.setY(625);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2449,7 +2449,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 150) {
                 sepPoint.setCenterY(595.0);
                 augSep.setEndY(595);
-                sepOct.setStartX(595);
+                sepOct.setStartY(595);
                 sepAmount.setY(610);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2457,7 +2457,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 160) {
                 sepPoint.setCenterY(580.0);
                 augSep.setEndY(580);
-                sepOct.setStartX(580);
+                sepOct.setStartY(580);
                 sepAmount.setY(595);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2465,7 +2465,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 170) {
                 sepPoint.setCenterY(565.0);
                 augSep.setEndY(565);
-                sepOct.setStartX(565);
+                sepOct.setStartY(565);
                 sepAmount.setY(580);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2473,7 +2473,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 180) {
                 sepPoint.setCenterY(550.0);
                 augSep.setEndY(550);
-                sepOct.setStartX(550);
+                sepOct.setStartY(550);
                 sepAmount.setY(565);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2481,7 +2481,7 @@ public class BudgetTracker extends Application {
             } else if (goalPercentRounded == 190) {
                 sepPoint.setCenterY(535.0);
                 augSep.setEndY(535);
-                sepOct.setStartX(535);
+                sepOct.setStartY(535);
                 sepAmount.setY(550);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -2489,7 +2489,7 @@ public class BudgetTracker extends Application {
             } else {
                 sepPoint.setCenterY(520.0);
                 augSep.setEndY(520);
-                sepOct.setStartX(520);
+                sepOct.setStartY(520);
                 sepAmount.setY(535);
                 sepAmount.setFill(Color.BLACK);
                 sepPoint.setStroke(Color.GREEN);
@@ -3754,7 +3754,7 @@ public class BudgetTracker extends Application {
         } catch (IOException e) {
         }
         
-        
+        savingTarget.setValue("0%");
         incomeAmount.setText("0");
         amount.setText("0");
         numbers = 0;
