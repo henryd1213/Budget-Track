@@ -230,8 +230,6 @@ public class BudgetTracker extends Application {
         Text budgetChartBoxLabel = new Text(550, 515, "Goal Achievement YTD - Current Balance and Percent of Goal Attained");
         budgetChartBoxLabel.setFill(Color.BLUE);
 
-      
-        
         Line horizAxis = new Line();
         horizAxis.setStartX(75);
         horizAxis.setStartY(820);
@@ -525,8 +523,44 @@ public class BudgetTracker extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    public void update(ActionEvent event) {
+    public void dataCheck(ActionEvent event) {
+        String incomeTest = incomeAmount.getText();
+        boolean incorrect = true;
+        while (incorrect) {
+            try {
+                Double.parseDouble(incomeTest);
+                incorrect = false;
+            } catch (NumberFormatException nfe) {
+                incomeTest = "0";
+                incomeAmount.setText("0");
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Invalid data type");
+                a.show();
+            }
+        }
+        String amountTest = amount.getText();
+        boolean incorrect2 = true;
+        while (incorrect2) {
+            try {
+                Double.parseDouble(amountTest);
+                incorrect2 = false;
+            } catch (NumberFormatException nfe) {
+                amountTest = "0";
+                amount.setText("0");
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Invalid data type");
+                a.show();
+            }
+        }
+        if (incorrect == false && incorrect2 == false) {
+            if ((event.getSource()).toString().contains("update")) {
+                update();
+            } else if ((event.getSource()).toString().contains("save")) {
+                save();
+            }
+        }
+    }
+    public void update() {
         String chosenExpense = expenseCategory.getValue().toString();
         String chosenSavings = savingCategory.getValue().toString();
         String chosenDirection = flowDirection.getValue().toString();
@@ -586,13 +620,10 @@ public class BudgetTracker extends Application {
         if (targetSaved == 0) {
             goalPercentRounded = 100;
         } else {
-
             goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
         }
-
         if (dateMonthInt == 1) {
             janAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 janPoint.setCenterY(820.0);
                 janFeb.setStartY(820);
@@ -745,16 +776,13 @@ public class BudgetTracker extends Application {
             if (janAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
-
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             febAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 febPoint.setCenterY(820.0);
                 janFeb.setEndY(820);
@@ -931,7 +959,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -941,12 +968,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             marAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 marPoint.setCenterY(820.0);
                 febMar.setEndY(820);
@@ -1133,23 +1158,19 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
-
             if (janAmount.getFill() != null && febAmount.getFill() != null && marAmount.getFill() != null) {
                 monthlyTotal += monthlyInc;
                 goalPercent = (monthlyTotal / goal) * 100;
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             aprAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 aprPoint.setCenterY(820.0);
                 marApr.setEndY(820);
@@ -1326,7 +1347,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1336,7 +1356,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1346,7 +1365,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1356,12 +1374,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             mayAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 mayPoint.setCenterY(820.0);
                 aprMay.setEndY(820);
@@ -1538,7 +1554,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1548,7 +1563,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1558,7 +1572,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1568,7 +1581,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1578,12 +1590,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             junAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 junPoint.setCenterY(820.0);
                 mayJun.setEndY(820);
@@ -1760,7 +1770,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1770,7 +1779,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1780,7 +1788,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1790,7 +1797,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1800,7 +1806,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -1810,12 +1815,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             julAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 julPoint.setCenterY(820.0);
                 junJul.setEndY(820);
@@ -1992,7 +1995,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2002,7 +2004,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2012,7 +2013,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2022,7 +2022,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2032,7 +2031,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2042,7 +2040,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2052,12 +2049,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             augAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 augPoint.setCenterY(820.0);
                 julAug.setEndY(820);
@@ -2234,7 +2229,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2244,7 +2238,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2254,7 +2247,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2264,7 +2256,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2274,7 +2265,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2284,7 +2274,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2294,7 +2283,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2304,12 +2292,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             sepAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 sepPoint.setCenterY(820.0);
                 augSep.setEndY(820);
@@ -2486,7 +2472,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2496,7 +2481,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2506,7 +2490,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2516,7 +2499,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2526,7 +2508,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2536,7 +2517,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2546,7 +2526,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2556,7 +2535,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2566,12 +2544,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             octAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 octPoint.setCenterY(820.0);
                 sepOct.setEndY(820);
@@ -2748,7 +2724,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2758,7 +2733,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2768,7 +2742,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2778,7 +2751,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2788,7 +2760,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2798,7 +2769,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2808,7 +2778,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2818,7 +2787,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2828,7 +2796,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -2838,12 +2805,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             novAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 novPoint.setCenterY(820.0);
                 octNov.setEndY(820);
@@ -3020,7 +2985,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3030,7 +2994,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3040,7 +3003,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3050,7 +3012,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3060,7 +3021,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3070,7 +3030,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3080,7 +3039,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3090,7 +3048,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3100,7 +3057,6 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
@@ -3110,12 +3066,10 @@ public class BudgetTracker extends Application {
                 if (targetSaved == 0) {
                     goalPercentRounded = 100;
                 } else {
-
                     goalPercentRounded = Math.round(goalPercent / 10.0) * 10;
                 }
             }
             decAmount.setText("$" + monthlyTotal + ", " + String.valueOf(goalPercentRounded) + "%");
-
             if (goalPercentRounded <= 0) {
                 decPoint.setCenterY(820.0);
                 novDec.setEndY(820);
@@ -3300,7 +3254,6 @@ public class BudgetTracker extends Application {
             novDec.setStroke(Color.BLACK);
         }
 
-        // double allNumbers = (monthlyInc * 12) - (janNumbers + febNumbers + marNumbers + aprNumbers + mayNumbers + junNumbers + julNumbers + augNumbers + sepNumbers + octNumbers + novNumbers + decNumbers);
         if (goal > monthlyTotal) {
             underperforming.setStroke(Color.RED);
             underperforming.setFill(Color.RED);
@@ -3322,49 +3275,6 @@ public class BudgetTracker extends Application {
             underperforming.setFill(null);
             meeting.setStroke(Color.BLACK);
             meeting.setFill(null);
-        }
-    }
-
-    public void dataCheck(ActionEvent event) {
-        String incomeTest = incomeAmount.getText();
-        boolean incorrect = true;
-        while (incorrect) {
-            try {
-                Double.parseDouble(incomeTest);
-                incorrect = false;
-            } catch (NumberFormatException nfe) {
-                incomeTest = "0";
-                incomeAmount.setText("0");
-                Alert a = new Alert(AlertType.ERROR);
-                a.setContentText("Invalid data type");
-                a.show();
-            }
-        }
-
-        String amountTest = amount.getText();
-        boolean incorrect2 = true;
-        while (incorrect2) {
-            try {
-                Double.parseDouble(amountTest);
-                incorrect2 = false;
-            } catch (NumberFormatException nfe) {
-                amountTest = "0";
-                amount.setText("0");
-                Alert a = new Alert(AlertType.ERROR);
-                a.setContentText("Invalid data type");
-                a.show();
-            }
-        }
-
-        if (incorrect == false && incorrect2 == false) {
-            if ((event.getSource()).toString().contains("update")) {
-                update.setOnAction(this::update);
-
-            } else if ((event.getSource()).toString().contains("save")) {
-                save();
-                //save.setOnAction(this::save);
-
-            }
         }
     }
 
@@ -3414,7 +3324,7 @@ public class BudgetTracker extends Application {
             } else if (overperforming.getFill() == Color.GREEN) {
                 writer.write("over");
                 writer.write("\r\n");
-            }else{
+            } else {
                 writer.write("neither");
                 writer.write("\r\n");
             }
@@ -3537,12 +3447,12 @@ public class BudgetTracker extends Application {
     }
 
     public void load(ActionEvent event) {
-        
+
         try {
             String txt = "BudgetDetails.txt";
             FileReader saves = new FileReader(txt);
             BufferedReader buff = new BufferedReader(saves);
-           
+
             incomeAmount.setText(buff.readLine());
             String savingsPerc = buff.readLine();
             savingTarget.setValue(savingsPerc + "%");
@@ -3797,8 +3707,6 @@ public class BudgetTracker extends Application {
             buff.close();
         } catch (IOException e) {
         }
-     
-
     }
 
     public void delete(ActionEvent event) {
@@ -3898,9 +3806,8 @@ public class BudgetTracker extends Application {
         goal1.setText("Set Goal");
         goal2.setText("Set Goal");
         goal3.setText("Set Goal");
-        
-      save();
-        
+
+        save();
     }
 
     /**
